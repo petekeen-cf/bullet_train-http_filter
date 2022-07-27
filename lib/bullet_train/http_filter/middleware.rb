@@ -9,7 +9,7 @@ module BulletTrain
         uri = BulletTrain::HTTPFilter::URI.new(datum)
         
         unless uri.allowed?
-          raise BulletTrain::HTTPFilter::BlockedURIError.new(uri.to_s)
+          raise BulletTrain::HTTPFilter::BlockedURIError.new(uri)
         end
 
         super
@@ -21,3 +21,4 @@ end
 module Excon
   VALID_REQUEST_KEYS << :httpfilter_context
   VALID_CONNECTION_KEYS << :httpfilter_context
+end

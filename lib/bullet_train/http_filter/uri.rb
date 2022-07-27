@@ -2,7 +2,13 @@ require 'addressable'
 
 module BulletTrain
   module HTTPFilter
-    class BlockedURIError < ArgumentError; end
+    class BlockedURIError < RuntimeError
+      attr_reader :uri
+
+      def initialize(uri)
+        @uri = uri
+      end
+    end
 
     class URI < Addressable::URI
       attr_accessor :httpfilter_context
@@ -10,8 +16,6 @@ module BulletTrain
       def self.parse(uri, httpfilter_context: nil)
         parsed = super(uri)
         parsed.httpfilter_context = httpfilter_context
-
-        raise BlockedURIError.new(uri) unless parsed.allowed?
 
         parsed
       end
