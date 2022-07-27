@@ -36,7 +36,6 @@ module BulletTrain
       allowed_schemes: %w[http https],
       custom_allow_callback: nil,
       custom_block_callback: nil,
-      audit_callback: nil,
       cache: nil,
     }
 
